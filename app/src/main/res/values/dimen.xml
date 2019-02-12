@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="error_message_padding">10dp</dimen>
+    <dimen name="error_message_text_size">16sp</dimen>
+    <dimen name="recipe_text_view_layout_margin">15dp</dimen>
+    <dimen name="recipe_text_view_padding">10dp</dimen>
+    <dimen name="recipe_text_view_text_size">28sp</dimen>
+    <dimen name="detail_activity_margin">10dp</dimen>
+    <dimen name="ingredients_title_size">20sp</dimen>
+    <dimen name="ingredients_title_margin">20dp</dimen>
+    <dimen name="ingredients_text_view_padding">8dp</dimen>
+    <dimen name="previous_next_button_padding">10dp</dimen>
+    <dimen name="textsize_xsmall">14sp</dimen>
+    <dimen name="elevation_textview">8dp</dimen>
+    <dimen name="activity_padding">10dp</dimen>
+    <dimen name="relative_layout_padding">16dp</dimen>
+    <dimen name="relative_layout_height">300dp</dimen>
+    <dimen name="image_view_padding">10dp</dimen>
+    <dimen name="text_view_description_padding">10dp</dimen>
+    <dimen name="text_view_description_text_size">16sp</dimen>
+    <dimen name="step_list_item_margin">10dp</dimen>
+    <dimen name="step_list_item_text_size">16sp</dimen>
+    <dimen name="view_height">1dp</dimen>
+</resources>

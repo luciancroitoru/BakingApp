@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">BakingApp</string>
+    <string name="data_loading_error_text">There was an error loading your data. \nCheck your internet connection.</string>
+
+    <string name="ingredients">Ingredients: </string>
+    <string name="baking_steps">Baking Steps: </string>
+
+    <string name="recipe_details">Recipe Details</string>
+
+    <string name="button_previous">Previous</string>
+    <string name="button_next">Next</string>
+
+    <string name="step_details">Step Details</string>
+    <string name="display_ingredient">Display Ingredients</string>
+
+    <string name="step_description">Description of step</string>
+    <string name="step_text">Step</string>
+
+    <string name="no_image_view">No recipe video available</string>
+
+    <string name="appwidget_header">Initial widget header</string>
+    <string name="appwidget_text">Click to add recipe ingredients</string>
+    <string name="add_widget">Add widget</string>
+</resources>
