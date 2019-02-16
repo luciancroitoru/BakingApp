@@ -117,4 +117,5 @@ public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClic
     public interface onListItemClickListener {
         void onStepSelected(int index);
     }
+
 }

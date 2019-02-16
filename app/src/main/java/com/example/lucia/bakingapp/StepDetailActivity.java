@@ -117,5 +117,11 @@ public class StepDetailActivity extends AppCompatActivity {
                 .commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, DetailActivity.class));
+        finish();
+    }
+
 }
 
