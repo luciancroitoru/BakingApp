@@ -6,13 +6,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.widget.TextView;
 
 import com.example.lucia.bakingapp.utils.Constants;
 
 public class BakingWidgetService extends IntentService {
 
     private static final String ACTION_UPDATE_WIDGET = "com.example.android.bakingapp.action.update_widget";
+
     /**
      * Creates an IntentService
      */
@@ -20,9 +20,10 @@ public class BakingWidgetService extends IntentService {
         super("BakingWidgetService");
     }
 
-    public static void startActionUpdateWidget(Context context) {
+    public static void startActionUpdateWidget(Context context, String ingredients) {
         Intent intent = new Intent(context, BakingWidgetService.class);
         intent.setAction(ACTION_UPDATE_WIDGET);
+        intent.putExtra(Constants.WIDGET_INGREDIENTS, ingredients);
         context.startService(intent);
     }
 
@@ -30,17 +31,17 @@ public class BakingWidgetService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
+            final String extra = intent.getStringExtra(Constants.WIDGET_INGREDIENTS);
             if (ACTION_UPDATE_WIDGET.equals(action)) {
-                handleActionUpdateWidget();
+                handleActionUpdateWidget(extra);
             }
         }
     }
 
-    private void handleActionUpdateWidget() {
+    private void handleActionUpdateWidget(String ingredients) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, BakingWidgetProvider.class));
 
-        String ingredients = Constants.WIDGET_INGREDIENTS;
         // Update widgets
         BakingWidgetProvider.updateBakingWidgets(this, appWidgetManager, appWidgetIds, ingredients);
     }

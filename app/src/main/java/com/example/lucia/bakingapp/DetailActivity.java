@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.lucia.bakingapp.UI.DetailFragment;
 import com.example.lucia.bakingapp.UI.StepDetailFragment;
@@ -17,13 +16,13 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 
 
-public class DetailActivity extends AppCompatActivity implements DetailFragment.onListItemClickListener{
+public class DetailActivity extends AppCompatActivity implements DetailFragment.onListItemClickListener {
 
     public static ArrayList<Recipe> recipe;
-    private Bundle recipeBundle;
-    private FragmentManager fragmentManager;
     String recipeName;
     boolean mTwoPane;
+    private Bundle recipeBundle;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,8 @@ public class DetailActivity extends AppCompatActivity implements DetailFragment.
 
         if (savedInstanceState == null) {
 
-        if (findViewById(R.id.tablet_layout) != null) {
-            mTwoPane = true;
+            if (findViewById(R.id.tablet_layout) != null) {
+                mTwoPane = true;
 
                 // Create fragment instance for ingredients and steps
                 DetailFragment recipeDetailFragment = new DetailFragment();
@@ -78,16 +77,16 @@ public class DetailActivity extends AppCompatActivity implements DetailFragment.
                     .replace(R.id.detail_fragment_container, recipeDetailFragment)
                     .commit();
         }
-}
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        BakingWidgetService.startActionUpdateWidget(this);
+        BakingWidgetService.startActionUpdateWidget(this, Constants.WIDGET_INGREDIENTS);
     }
 
-    public void onClickIngredients(View view){
-        BakingWidgetService.startActionUpdateWidget(this);
+    public void onClickIngredients(View view) {
+        BakingWidgetService.startActionUpdateWidget(this, Constants.WIDGET_INGREDIENTS);
     }
 
     @Override
@@ -120,6 +119,5 @@ public class DetailActivity extends AppCompatActivity implements DetailFragment.
             intent.putExtra(Constants.STEP_COUNT, stepsCount);
             startActivity(intent);
         }
-
     }
 }

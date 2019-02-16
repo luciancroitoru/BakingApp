@@ -17,7 +17,6 @@ public class BakingWidgetProvider extends AppWidgetProvider {
 
         // create intent lo launch activity when clicked
         Intent intent = new Intent(context, MainActivity.class);
-        //intent.putExtra(Constants.WIDGET_RECIPE, recipe);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
         // Construct the RemoteViews object

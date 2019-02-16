@@ -1,10 +1,10 @@
 package com.example.lucia.bakingapp.UI;
 
 import android.annotation.TargetApi;
-import android.os.Build;
-import android.support.v4.app.Fragment;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,18 +31,14 @@ import static com.example.lucia.bakingapp.utils.Constants.SELECTED_RECIPE;
 
 public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClickListener {
 
-    onListItemClickListener callback;
-
-    ArrayList<Recipe> recipe;
-
-    private Unbinder unbinder;
-
     public String widgetRecipeText;
-
-   // private Recipe mSelectedRecipe;
-   // private List<Ingredient> mIngredients;
-    @BindString(R.string.display_ingredient)        String mDisplayIngredient;
-    @BindView(R.id.text_view_ingredients)           TextView ingredientTextView;
+    onListItemClickListener callback;
+    ArrayList<Recipe> recipe;
+    @BindString(R.string.display_ingredient)
+    String mDisplayIngredient;
+    @BindView(R.id.text_view_ingredients)
+    TextView ingredientTextView;
+    private Unbinder unbinder;
 
     public DetailFragment() {
     }
@@ -68,7 +64,7 @@ public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClic
         View rootView = inflater.inflate(R.layout.activity_detail_recipe_fragment, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        if (getArguments()!=null){
+        if (getArguments() != null) {
 
             recipe = getArguments().getParcelableArrayList(SELECTED_RECIPE);
 
@@ -84,9 +80,6 @@ public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClic
             stepsRecyclerView.setAdapter(stepsAdapter);
             stepsRecyclerView.setLayoutManager(stepsLayoutManager);
             stepsRecyclerView.setNestedScrollingEnabled(false);
-
-            Bundle bundle = new Bundle();
-            bundle.putString(Constants.WIDGET_INGREDIENTS, widgetRecipeText);
 
         }
         return rootView;
@@ -106,6 +99,9 @@ public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClic
             ingredientTextView.append("\t\t\t" + ingredient.getIngredientMeasure() + "\n\n");
         });
         widgetRecipeText = ingredientTextView.getText().toString();
+
+        Bundle ingredientsBundle = new Bundle();
+        ingredientsBundle.putString(Constants.WIDGET_INGREDIENTS, widgetRecipeText);
     }
 
     @Override
@@ -117,5 +113,5 @@ public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClic
     public interface onListItemClickListener {
         void onStepSelected(int index);
     }
-
 }
+
