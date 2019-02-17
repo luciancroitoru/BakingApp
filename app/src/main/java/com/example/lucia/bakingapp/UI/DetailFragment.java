@@ -2,6 +2,7 @@ package com.example.lucia.bakingapp.UI;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,6 @@ import com.example.lucia.bakingapp.adapters.StepsAdapter;
 import com.example.lucia.bakingapp.data.Ingredient;
 import com.example.lucia.bakingapp.data.Recipe;
 import com.example.lucia.bakingapp.data.Step;
-import com.example.lucia.bakingapp.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import static com.example.lucia.bakingapp.utils.Constants.SELECTED_RECIPE;
 
 public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClickListener {
 
-    public String widgetRecipeText;
+    public String widgetRecipeText = "";
     onListItemClickListener callback;
     ArrayList<Recipe> recipe;
     @BindString(R.string.display_ingredient)
@@ -70,6 +70,11 @@ public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClic
 
             displayIngredients();
 
+            SharedPreferences preferences = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("preference_ingredients", widgetRecipeText);
+            editor.apply();
+
             RecyclerView stepsRecyclerView = rootView.findViewById(R.id.recycler_view_steps);
 
             List<Step> steps = recipe.get(0).getSteps();
@@ -97,11 +102,11 @@ public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClic
             ingredientTextView.append("\u2022 " + ingredient.getIngredient());
             ingredientTextView.append("\t\t\t" + ingredient.getIngredientQuantity().toString());
             ingredientTextView.append("\t\t\t" + ingredient.getIngredientMeasure() + "\n\n");
-        });
-        widgetRecipeText = ingredientTextView.getText().toString();
 
-        Bundle ingredientsBundle = new Bundle();
-        ingredientsBundle.putString(Constants.WIDGET_INGREDIENTS, widgetRecipeText);
+            widgetRecipeText = widgetRecipeText + "\u2022 " + ingredient.getIngredient();
+            widgetRecipeText = widgetRecipeText + "\t\t\t" + ingredient.getIngredientQuantity().toString();
+            widgetRecipeText = widgetRecipeText + "\t\t\t" + ingredient.getIngredientMeasure() + "\n\n";
+        });
     }
 
     @Override

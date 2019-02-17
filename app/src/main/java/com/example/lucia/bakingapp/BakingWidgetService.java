@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 
 import com.example.lucia.bakingapp.utils.Constants;
@@ -20,10 +21,9 @@ public class BakingWidgetService extends IntentService {
         super("BakingWidgetService");
     }
 
-    public static void startActionUpdateWidget(Context context, String ingredients) {
+    public static void startActionUpdateWidget(Context context) {
         Intent intent = new Intent(context, BakingWidgetService.class);
         intent.setAction(ACTION_UPDATE_WIDGET);
-        intent.putExtra(Constants.WIDGET_INGREDIENTS, ingredients);
         context.startService(intent);
     }
 
@@ -31,7 +31,10 @@ public class BakingWidgetService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            final String extra = intent.getStringExtra(Constants.WIDGET_INGREDIENTS);
+            //final String extra = intent.getStringExtra(Constants.WIDGET_INGREDIENTS);
+            SharedPreferences preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+            //SharedPreferences.Editor editor = preferences.edit();
+            String extra = preferences.getString("preference_ingredients", "nothing found");
             if (ACTION_UPDATE_WIDGET.equals(action)) {
                 handleActionUpdateWidget(extra);
             }

@@ -13,6 +13,7 @@ import com.example.lucia.bakingapp.utils.Constants;
 
 import java.util.ArrayList;
 
+import butterknife.BindBool;
 import butterknife.ButterKnife;
 
 
@@ -20,9 +21,10 @@ public class DetailActivity extends AppCompatActivity implements DetailFragment.
 
     public static ArrayList<Recipe> recipe;
     String recipeName;
-    boolean mTwoPane;
     private Bundle recipeBundle;
     private FragmentManager fragmentManager;
+
+    @BindBool(R.bool.two_pane_layout) boolean isTwoPaneLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +48,11 @@ public class DetailActivity extends AppCompatActivity implements DetailFragment.
 
         if (savedInstanceState == null) {
 
-            if (findViewById(R.id.tablet_layout) != null) {
-                mTwoPane = true;
+            if (isTwoPaneLayout) {
 
                 // Create fragment instance for ingredients and steps
                 DetailFragment recipeDetailFragment = new DetailFragment();
+                recipeBundle.putInt(Constants.SELECTED_STEP, 0);
                 recipeDetailFragment.setArguments(recipeBundle);
                 fragmentManager
                         .beginTransaction()
@@ -67,33 +69,37 @@ public class DetailActivity extends AppCompatActivity implements DetailFragment.
                         .replace(R.id.detail_step_fragment_container, stepDetailFragment)
                         .addToBackStack(Constants.STACK_RECIPE_STEP_DETAIL)
                         .commit();
-            } else mTwoPane = false;
+            } else {
 
-            // Create fragment instance for ingredients and steps
-            DetailFragment recipeDetailFragment = new DetailFragment();
-            recipeDetailFragment.setArguments(recipeBundle);
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.detail_fragment_container, recipeDetailFragment)
-                    .commit();
+                // Create fragment instance for ingredients and steps
+                DetailFragment recipeDetailFragment = new DetailFragment();
+                recipeDetailFragment.setArguments(recipeBundle);
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.detail_fragment_container, recipeDetailFragment)
+                        .commit();
+            }
         }
     }
+
 
     @Override
     protected void onStart() {
         super.onStart();
-        BakingWidgetService.startActionUpdateWidget(this, Constants.WIDGET_INGREDIENTS);
+        BakingWidgetService.startActionUpdateWidget(this);
     }
 
+
     public void onClickIngredients(View view) {
-        BakingWidgetService.startActionUpdateWidget(this, Constants.WIDGET_INGREDIENTS);
+        BakingWidgetService.startActionUpdateWidget(this);
     }
+
 
     @Override
     public void onStepSelected(int index) {
         int stepsCount = recipe.get(0).getSteps().size();
 
-        if (findViewById(R.id.tablet_layout) != null) {
+        if (isTwoPaneLayout) {
             Bundle stepBundle = new Bundle();
             stepBundle.putParcelableArrayList(Constants.SELECTED_RECIPE, recipe);
             stepBundle.putInt(Constants.SELECTED_STEP, index);
