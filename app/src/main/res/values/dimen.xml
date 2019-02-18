@@ -21,4 +21,10 @@
     <dimen name="step_list_item_margin">10dp</dimen>
     <dimen name="step_list_item_text_size">16sp</dimen>
     <dimen name="view_height">1dp</dimen>
+    <dimen name="view_width">1dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_height">180dp</dimen>
+    <dimen name="widget_width">250dp</dimen>
+    <dimen name="tablet_ingredients_fragment_container_width">450dp</dimen>
+    <dimen name="tablet_padding_top_details_step_fragment_container">16dp</dimen>
 </resources>

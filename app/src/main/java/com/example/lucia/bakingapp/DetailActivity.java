@@ -1,10 +1,12 @@
 package com.example.lucia.bakingapp;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.lucia.bakingapp.UI.DetailFragment;
 import com.example.lucia.bakingapp.UI.StepDetailFragment;
@@ -31,6 +33,10 @@ public class DetailActivity extends AppCompatActivity implements DetailFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+
+        if(getResources().getBoolean(R.bool.landscape_only)){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
 
         if (getIntent().getExtras() != null) {
             recipeBundle = getIntent().getExtras();
@@ -87,13 +93,15 @@ public class DetailActivity extends AppCompatActivity implements DetailFragment.
     protected void onStart() {
         super.onStart();
         BakingWidgetService.startActionUpdateWidget(this);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.widget_update_toast_message, Toast.LENGTH_SHORT);
+        toast.show();
     }
-
 
     public void onClickIngredients(View view) {
         BakingWidgetService.startActionUpdateWidget(this);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.widget_update_toast_message, Toast.LENGTH_SHORT);
+        toast.show();
     }
-
 
     @Override
     public void onStepSelected(int index) {
@@ -125,5 +133,11 @@ public class DetailActivity extends AppCompatActivity implements DetailFragment.
             intent.putExtra(Constants.STEP_COUNT, stepsCount);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

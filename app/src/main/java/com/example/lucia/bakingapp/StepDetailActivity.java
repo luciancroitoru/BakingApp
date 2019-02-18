@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.lucia.bakingapp.UI.StepDetailFragment;
@@ -17,13 +18,13 @@ import butterknife.OnClick;
 
 public class StepDetailActivity extends AppCompatActivity {
 
+    Bundle extras;
     private Recipe recipe;
     private int stepId;
     private int stepCount;
     private Bundle stepBundle;
     private ArrayList<Recipe> selectedRecipe;
     private FragmentManager fragmentManager;
-    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class StepDetailActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         // Create fragment instance only once
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             displayStepFragment();
         }
     }
@@ -99,8 +100,7 @@ public class StepDetailActivity extends AppCompatActivity {
         }
     }
 
-
-    public void displayStepFragment(){
+    public void displayStepFragment() {
         stepBundle = new Bundle();
         selectedRecipe = new ArrayList<>();
         selectedRecipe.add(recipe);
@@ -119,9 +119,25 @@ public class StepDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, DetailActivity.class));
+        super.onBackPressed();
+        Bundle bundle = new Bundle();
+        selectedRecipe = new ArrayList<>();
+        selectedRecipe.add(recipe);
+        bundle.putParcelableArrayList(Constants.SELECTED_RECIPE, selectedRecipe);
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
         finish();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return false;
+    }
 }
 

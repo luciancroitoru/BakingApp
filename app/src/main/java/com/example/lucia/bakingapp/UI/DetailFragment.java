@@ -101,7 +101,7 @@ public class DetailFragment extends Fragment implements StepsAdapter.StepsOnClic
         {
             ingredientTextView.append("\u2022 " + ingredient.getIngredient());
             ingredientTextView.append("\t\t\t" + ingredient.getIngredientQuantity().toString());
-            ingredientTextView.append("\t\t\t" + ingredient.getIngredientMeasure() + "\n\n");
+            ingredientTextView.append("\t\t\t" + ingredient.getIngredientMeasure() + "\n");
 
             widgetRecipeText = widgetRecipeText + "\u2022 " + ingredient.getIngredient();
             widgetRecipeText = widgetRecipeText + "\t\t\t" + ingredient.getIngredientQuantity().toString();

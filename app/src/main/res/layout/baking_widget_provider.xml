@@ -4,21 +4,12 @@
     android:background="@color/colorBackground"
     android:padding="@dimen/widget_margin">
 
-    <ImageView
-        android:id="@+id/cake_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:scaleType="centerCrop"
-        android:src="@drawable/cake_img_large"
-        android:visibility="gone"/>
-
     <TextView
         android:id="@+id/appwidget_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/widget_margin"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="@string/appwidget_text"
         android:textColor="@color/colorTextPrimary"
         android:fontFamily="sans-serif-condensed"

@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:orientation="horizontal"
+    android:fillViewport="true"
     android:background="@color/colorBackground"
-    android:id="@+id/tablet_layout"
     tools:context="com.example.lucia.bakingapp.DetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <!-- Fragment to display Ingredients and List of Steps -->
     <FrameLayout
         android:id="@+id/detail_fragment_container"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_width="@dimen/tablet_ingredients_fragment_container_width"
+        android:layout_height="match_parent">
     </FrameLayout>
 
     <!-- Divider -->
     <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_width="@dimen/view_width"
+        android:layout_height="match_parent"
         android:background="@android:color/darker_gray" />
 
     <!-- Fragment to display media and step details -->
     <FrameLayout
         android:id="@+id/detail_step_fragment_container"
-        android:paddingTop="16dp"
+        android:paddingTop="@dimen/tablet_padding_top_details_step_fragment_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
     </FrameLayout>
 </LinearLayout>
+</ScrollView>
