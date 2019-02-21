@@ -297,9 +297,10 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
 
     @Override
     public void onPause() {
+        if (exoPlayer != null) {
+            releasePlayer();
+        }
         super.onPause();
-        if (exoPlayer != null) playerPosition = exoPlayer.getCurrentPosition();
-        releasePlayer();
     }
 
     @Override

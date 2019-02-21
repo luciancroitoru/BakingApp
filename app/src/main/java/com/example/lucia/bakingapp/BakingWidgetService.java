@@ -31,9 +31,7 @@ public class BakingWidgetService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            //final String extra = intent.getStringExtra(Constants.WIDGET_INGREDIENTS);
             SharedPreferences preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
-            //SharedPreferences.Editor editor = preferences.edit();
             String extra = preferences.getString("preference_ingredients", "nothing found");
             if (ACTION_UPDATE_WIDGET.equals(action)) {
                 handleActionUpdateWidget(extra);
